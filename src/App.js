@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.css';
+
+import Home from './containers/Home';
+import Register from './containers/Register';
+import Login from './containers/Login';
+import AdminPanel from './containers/AdminPanel';
+import UserPanel from './containers/UserPanel';
+import LibrarianPanel from './containers/LibrarianPanel';
+
+import NavLayout from './layout/NavLayout';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <NavLayout>
+            <Route exact path="/" component={Home} />
+            <Route path="/Register" component={Register} />
+            <Route path="/Login" component={Login} />
+            <Route path="/admin/:id" component={AdminPanel} />
+            <Route path="/user/:id" component={UserPanel} />
+            <Route path="/librarian/:id" component={LibrarianPanel} />
+          </NavLayout>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+
