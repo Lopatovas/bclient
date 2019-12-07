@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Table(props) {
-  const {tableHeader, tableItems, withActions, deleteHandler, addHandler} = props;
+  const {tableHeader, tableItems, withActions, editHandler, tableAction} = props;
   return (
     <table className="table table-hover">
   <thead>
@@ -14,15 +14,11 @@ function Table(props) {
   </thead>
   <tbody>
     {tableItems.map((item, i) => 
-    <tr key={i}>
+    <tr key={i} onClick={() => {tableAction(item);}}>
       <th scope="row">{i+1}</th>
       <td>{item.name}</td>
       <td>{item.amount}</td>
-      {withActions ?       
-        <React.Fragment>
-          <td><button className="btn btn-light btn-sm"><i className="fa fa-plus"></i></button></td>
-          <td><button onClick={ () => {console.log(item)}}className="btn btn-light btn-sm"><i className="fa fa-trash"></i></button></td>
-        </React.Fragment> : null}
+      {withActions ? <td><button onClick={ () => {editHandler(item)}} className="btn btn-light btn-sm"><i className="fa fa-plus"></i></button></td> : null}
     </tr>)}
   </tbody>
 </table>
@@ -32,13 +28,17 @@ function Table(props) {
 Table.propTypes = {
   tableHeader: PropTypes.arrayOf(PropTypes.string),
   tableItems: PropTypes.arrayOf(PropTypes.object),
-  withActions: PropTypes.bool
+  withActions: PropTypes.bool,
+  editHandler: PropTypes.func,
+  tableAction: PropTypes.func,
 };
 
 Table.defaultProps = {
   tableHeader: [],
   tableItems: [{name: '', amount: 0}],
-  withActions: false
+  withActions: false,
+  editHandler: () => {},
+  tableAction: () => {},
 };
 
 export default Table;

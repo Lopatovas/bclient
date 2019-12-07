@@ -8,6 +8,7 @@ import Login from './containers/Login';
 import AdminPanel from './containers/AdminPanel';
 import UserPanel from './containers/UserPanel';
 import LibrarianPanel from './containers/LibrarianPanel';
+import Book from './containers/Book';
 
 import NavLayout from './layout/NavLayout';
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/admin/:id" component={AdminPanel} />
             <Route path="/user/:id" component={UserPanel} />
             <Route path="/librarian/:id" component={LibrarianPanel} />
+            <Route path="/book/:name" component={Book} />
           </NavLayout>
         </Switch>
       </BrowserRouter>
