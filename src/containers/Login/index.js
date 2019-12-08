@@ -29,7 +29,6 @@ class Login extends React.Component {
     fetch("http://127.0.0.1:8000/login", params)
       .then((resp) => resp.json())
       .then(parsed => {
-        console.log(parsed);
         if(parsed.errors || !parsed.access_token){
           if(parsed.errors){
             this.setState({errors: parsed.errors, loading: false})

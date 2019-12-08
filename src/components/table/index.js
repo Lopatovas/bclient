@@ -17,7 +17,7 @@ function Table(props) {
     <tr key={i} onClick={() => {tableAction(item);}}>
       <th scope="row">{i+1}</th>
       <td>{item.name}</td>
-      <td>{item.amount}</td>
+      <td>{item.taken_to ? item.taken_to : item.amount}</td>
       {withActions ? <td><button onClick={ () => {editHandler(item)}} className="btn btn-light btn-sm"><i className="fa fa-plus"></i></button></td> : null}
     </tr>)}
   </tbody>
