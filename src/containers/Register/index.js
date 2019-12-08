@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FormWrapper from '../../components/formWrapper';
 import Input from '../../components/input';
 
 class Register extends React.Component {
@@ -45,12 +44,9 @@ class Register extends React.Component {
 
   render() {
     const {email, password, name} = this.state.errors;
-    const {loading} = this.state;
     return (
       <div className="container">
-        {!loading ? (
-        <FormWrapper callBack={this.submitForm} submitText="Register">
-          <React.Fragment>
+        <form>
             <Input labelText="Name" id="nameField" error={name}>
               <input type="text" className="form-control" id="nameField" placeholder="Bob" ref={(input) => this.nameInput = input}/>
             </Input>
@@ -60,13 +56,12 @@ class Register extends React.Component {
             <Input labelText="Password" id="passwordField" error={password}>
               <input type="password" className="form-control" id="passwordField" placeholder="" ref={(input) => this.passwordInput = input} />
           </Input>
-        </React.Fragment>
-        </FormWrapper>) : (
-        <div className="spinner-border text-primary" style={{"marginLeft": "50%"}} role="status">
-          <span className="sr-only">Loading...</span>
-        </div>)}
-      </div>
-    );
+          <button onClick={() => { this.submitForm(); }} type="button" className="btn btn-dark">
+            Register
+          </button>
+      </form>
+    </div>
+  );
   }
 }
 

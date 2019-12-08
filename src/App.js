@@ -5,10 +5,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Home from './containers/Home';
 import Register from './containers/Register';
 import Login from './containers/Login';
-import AdminPanel from './containers/AdminPanel';
-import UserPanel from './containers/UserPanel';
-import LibrarianPanel from './containers/LibrarianPanel';
-import Book from './containers/Book';
+import CreateCourse from './containers/CreateCourse';
+import RegisterCourse from './containers/RegisterCourse';
+import ViewRegistrations from './containers/ViewRegistrations';
+import ViewParticipants from './containers/ViewParticipants';
+import GiveRole from './containers/GiveRole';
+import AssignStudents from './containers/AssignStudents';
+
 
 import NavLayout from './layout/NavLayout';
 
@@ -22,10 +25,12 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/Register" component={Register} />
             <Route path="/Login" component={Login} />
-            <Route path="/admin/:id" component={AdminPanel} />
-            <Route path="/user/:id" component={UserPanel} />
-            <Route path="/librarian/:id" component={LibrarianPanel} />
-            <Route path="/book/:name" component={Book} />
+            <Route path="/createCourse" component={CreateCourse} />
+            <Route path="/registerCourse/:id" component={RegisterCourse} />
+            <Route path="/viewRegistrations/:id" component={ViewRegistrations} />
+            <Route path="/viewParticipants/:id" component={ViewParticipants} />
+            <Route path="/giveProfessorStatus" component={GiveRole} />
+            <Route path="/AssignStudents/:id" component={AssignStudents} />
           </NavLayout>
         </Switch>
       </BrowserRouter>

@@ -9,7 +9,7 @@ function FormWrapper(props) {
     callBack();
   };
   return (
-    <form className="shadow-lg p-3 mb-5 bg-white rounded">
+    <form>
       {children}
       <button onClick={(e) => { handleSubmit(e); }} type="button" className="btn btn-light">
         {submitText}

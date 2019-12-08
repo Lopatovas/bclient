@@ -1,39 +1,72 @@
 import React from 'react';
 
 import Table from '../../components/table';
-import WithLoading from '../../HOC/loader';
-
-const TableWithLoader = WithLoading(Table);
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loggedIn: false, books: [], loading: false };
-    this.getBooks = this.getBooks.bind(this);
+    this.state = { loggedIn: false, courses: [], loading: false };
+    this.getCourse = this.getCourse.bind(this);
+    this.getAllCourses = this.getAllCourses.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ loggedIn: localStorage.getItem('isUser') });
-    this.getBooks();
+    this.setState({ loggedIn: localStorage.getItem('role') });
+    if(localStorage.getItem('role') === "admin"){
+      this.getAllCourses();
+    }
+    else {
+      this.getCourse();
+    }
   }
 
-  getBooks() {
+  getCourse() {
     const params = {
-      method:"GET"
+      method:"GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('session')}`
+      },
     }
     this.setState({ loading: true });
-    fetch("http://127.0.0.1:8000/book/showDistinct", params)
+    fetch("http://127.0.0.1:8000/course/showAllOpen", params)
       .then((resp) => resp.json())
-      .then(parsed => this.setState({books: parsed.books, loading: false}))
+      .then(parsed => this.setState({courses: parsed.courses, loading: false}))
+      .catch(e => console.log(e));
+  }
+
+  getAllCourses() {
+    const params = {
+      method:"GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('session')}`
+      },
+    }
+    this.setState({ loading: true });
+    fetch("http://127.0.0.1:8000/api/course/index", params)
+      .then((resp) => resp.json())
+      .then(parsed => this.setState({courses: parsed.courses, loading: false}))
       .catch(e => console.log(e));
   }
 
   render() {
+    const { history } = this.props;
     return (
       <div className="container">
-        <div className="card">
-          <TableWithLoader tableHeader={['Number', 'Name', 'Amount']} tableItems={this.state.books} isLoading={this.state.loading}/>
-        </div>
+          <Table 
+            tableHeader={['Number', 'Name', 'Description', 'Price', 'Slots', 'Time', 'Status']} 
+            tableItems={this.state.courses}
+            tableAction={this.state.loggedIn ? 
+              (item) => {
+                if(this.state.loggedIn === 'admin'){
+                  history.push(`/viewRegistrations/${item.id}`);
+                }
+              }
+              : null}
+          />
       </div>
     );
   }

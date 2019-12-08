@@ -7,10 +7,10 @@ function NavBar(props) {
   const { routes } = props;
   return (
     <div className="shadow-sm mb-5 bg-white rounded">
-      <ul className="nav flex-row justify-content-center">
+      <ul className="nav nav-dark bg-dark flex-row justify-content-left">
         {routes.map((route, i) => (
           <li className="nav-item" key={i}>
-            {route.action ? <a className="nav-link" href="/" onClick={(e) => { e.preventDefault(); route.action(e); }}>Log out</a> : <Link className="nav-link" to={route.url}>{route.name}</Link>}
+            {route.action ? <a className="nav-link text-white" href="/" onClick={(e) => { e.preventDefault(); route.action(e); }}>Log out</a> : <Link className="nav-link text-white" to={route.url}>{route.name}</Link>}
           </li>
         ))}
       </ul>

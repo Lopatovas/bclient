@@ -33,10 +33,10 @@ class NavLayout extends React.Component {
 
   render() {
     const { children } = this.props;
-    const { panelPath } = this.state;
+    const { panelPath, loggedIn } = this.state;
     return (
       <div>
-        <NavBar routes={new navBarRoutes(this.state.loggedIn).getNavigation(this.handleLogOut, panelPath)} />
+        <NavBar routes={new navBarRoutes(panelPath, loggedIn).getNavigation(this.handleLogOut, panelPath)} />
         {children}
       </div>
     );

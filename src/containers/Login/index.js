@@ -38,6 +38,7 @@ class Login extends React.Component {
           }
         }
         else {
+          console.log(parsed);
           localStorage.setItem('role', parsed.user.role);
           localStorage.setItem('id', parsed.user.id);
           localStorage.setItem('session', parsed.access_token);
@@ -52,22 +53,20 @@ class Login extends React.Component {
 
   render() {
     const {email, password} = this.state.errors;
-    const {loading} = this.state;
     return (
       <div className="container">
-        {!loading ? (
-        <FormWrapper callBack={this.submitForm} submitText="Login">
-          <Input labelText="Email" id="emailField" error={email}>
-            <input type="email" className="form-control" id="emailField" placeholder="name@example.com" ref={(input) => this.emailInput = input} />
+        <form>
+            <Input labelText="Email" id="emailField" error={email}>
+              <input type="email" className="form-control" id="emailField" placeholder="name@example.com" ref={(input) => this.emailInput = input} />
+            </Input>
+            <Input labelText="Password" id="passwordField" error={password}>
+              <input type="password" className="form-control" id="passwordField" placeholder="" ref={(input) => this.passwordInput = input} />
           </Input>
-          <Input labelText="Password" id="passwordField" error={password}>
-            <input type="password" className="form-control" id="passwordField" placeholder="" ref={(input) => this.passwordInput = input} />
-          </Input>
-        </FormWrapper>) : (
-        <div className="spinner-border text-primary" style={{"marginLeft": "50%"}} role="status">
-          <span className="sr-only">Loading...</span>
-        </div>)}
-      </div>
+          <button onClick={() => { this.submitForm(); }} type="button" className="btn btn-dark">
+            Log in
+          </button>
+      </form>
+    </div>
     );
   }
 }
