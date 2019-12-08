@@ -92,8 +92,7 @@ class Panel extends React.Component {
     fetch(`http://127.0.0.1:8000/course/getUsers/${this.props.match.params.id}`, params)
       .then((resp) => resp.json())
       .then(parsed => {
-          console.log(parsed[0]);
-          this.setState({students: parsed[0] || []});
+          this.setState({students: parsed || []});
         })
       .catch(e => console.log(e));
   }

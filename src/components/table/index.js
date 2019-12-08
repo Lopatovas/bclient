@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 function Table(props) {
   const {tableHeader, tableItems, withActions, editHandler, tableAction} = props;
-  console.log(tableItems);
   return (
     <table className={tableAction ? "table table-hover": "table"}>
   <thead>
